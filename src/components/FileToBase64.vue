@@ -15,28 +15,35 @@
           @change="inputFileChanged($event)"
         >
       </div>
-      <div>
-        <div v-for="(result, idx) in base64Results" :key="idx">
-          <img class="base64-result-preview" :src="result" :alt="`img-idx-${idx}`">
-          <textarea :value="result" disabled></textarea>
-          <span><a :href="result" target="_blank">Abrir em uma nova aba</a></span>
-        </div>
+
+      <div v-if="logs && logs.length">
+        <p>Logs da conversão</p>
+        <ul>
+          <li v-for="(log, idx) in logs" :key="idx">{{log}}</li>
+        </ul>
       </div>
+
+      <Base64ResultsList :base64Results="base64Results" />
     </div>
   </div>
 </template>
 
 <script>
+import Base64ResultsList from "@/components/Base64ResultsList.vue";
 import base64 from "@/services/base64";
 
 export default {
   name: 'FileToBase64',
 
+  components: {
+    Base64ResultsList,
+  },
+
   data: () => ({
     allowedMimeTypes: ['image/jpeg', 'image/png'],
     pickDirectory: false,
-    base64Result: null,
     base64Results: [],
+    logs: [],
   }),
 
   computed: {
@@ -54,7 +61,9 @@ export default {
       this.base64Results.splice(0);
       for (const file of files) {
         if (!this.allowedMimeTypes.includes(file.type)) {
-          console.debug(`Arquivo ${file.name} do tipo '${file.type}' não suportado. Pulando...`);
+          const logMsg = `[AVISO] ${file.name} do tipo '${file.type || 'desconhecido'}' não é suportado.`;
+          console.debug(logMsg);
+          this.logs.push(logMsg);
           continue;
         }
 
@@ -65,10 +74,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.base64-result-preview {
-  max-width: 200px;
-  max-height: 200px;
-}
-</style>
