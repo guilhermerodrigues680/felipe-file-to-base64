@@ -1,5 +1,7 @@
+// https://cli.vuejs.org/config
 module.exports = {
-  publicPath: '', // https://cli.vuejs.org/config/#publicpath
+  publicPath: '',
+  outputDir: 'docs', // GitHub Pages
 
   chainWebpack: config => {
     // vue inspect --plugin html
