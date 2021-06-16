@@ -1,28 +1,16 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <FileToBase64 />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FileToBase64 from './components/FileToBase64.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    FileToBase64
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
