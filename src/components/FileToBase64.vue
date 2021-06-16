@@ -1,11 +1,19 @@
 <template>
   <div>
-    <h1>File to base64</h1>
-    <div>
+    <div class="flex items-end bg-white h-28 p-4">
+      <span class="text-3xl text-gray-600">Conversor para base64</span>
+    </div>
+
+    <h2 class="bg-indigo-500 m-2 p-4 rounded text-white text-xl">
+      Seleção de arquivos
+    </h2>
+
+    <div class="flex gap-x-4 border p-4 m-2">
       <div>
         <input type="checkbox" v-model="pickDirectory">
         Ler um diretório
       </div>
+
       <div>
         <input
           type="file"
@@ -15,14 +23,16 @@
           @change="inputFileChanged($event)"
         >
       </div>
+    </div>
 
-      <div v-if="logs && logs.length">
-        <p>Logs da conversão</p>
-        <ul>
-          <li v-for="(log, idx) in logs" :key="idx">{{log}}</li>
-        </ul>
-      </div>
+    <div v-if="logs && logs.length" class="px-2 font-mono">
+      <p class="text-sm text-yellow-500 uppercase">Logs da conversão</p>
+      <ul class="text-xs text-gray-500">
+        <li v-for="(log, idx) in logs" :key="idx">{{log}}</li>
+      </ul>
+    </div>
 
+    <div class="m-2">
       <Base64ResultsList :base64Results="base64Results" />
     </div>
   </div>

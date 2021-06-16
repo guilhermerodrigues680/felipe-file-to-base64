@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-gray-100 min-h-full pb-16">
     <FileToBase64 />
   </div>
 </template>
